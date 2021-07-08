@@ -32,6 +32,7 @@ gem 'dotenv'
 #####
 gem 'grape'
 gem 'grape-swagger'
+gem 'grape-swagger-rails'
 gem 'jwt'
 gem 'jsonapi-serializer'
 
