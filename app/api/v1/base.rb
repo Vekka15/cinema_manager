@@ -3,8 +3,7 @@
 module V1
   class Base < Grape::API
     def self.use_api(settings = {})
-      # include API::V1::Serialization
-      # include API::V1::Errors
+      include ::Helpers::Exceptions
     end
   end
 end
