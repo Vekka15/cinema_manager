@@ -34,6 +34,7 @@ gem 'grape'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 gem 'jwt'
+gem 'grape_fast_jsonapi'
 gem 'jsonapi-serializer'
 
 group :development, :test do
