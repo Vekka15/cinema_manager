@@ -10,7 +10,6 @@ module Api
     end
 
     def call
-      binding.pry
       return ::JsonWebToken.encode(user_id: user.id) if user && user.authenticate(password)
         
       raise InvalidCredentialsError.new

@@ -4,8 +4,6 @@ module Api
   module ErrorHandlers
     class GrapeValidation < Base
 
-      STATUS = 422
-
       private
 
       def options

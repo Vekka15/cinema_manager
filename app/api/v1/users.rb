@@ -6,7 +6,7 @@ module V1
 
     resources :users do
       desc 'Login cinema owner',
-            success: { code: 201, message: '' }
+            success: { code: 200, message: '' }
 
       params do
         requires :username, type: String, desc: 'Email of a user'

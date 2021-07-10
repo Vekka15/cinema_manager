@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe Api::Authentication do
-  subject(:authenticator) { Api::Authentication.call(username, password) }
+  subject(:authenticator) { described_class.call(username, password) }
 
   let(:username) { 'test_user' }
   let(:password) { 'test_password' }
-  let(:user) do
+  let!(:user) do
     create :user, username: 'test_user', password_digest: BCrypt::Password.create('test_password')
   end
 
