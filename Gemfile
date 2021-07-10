@@ -31,11 +31,11 @@ gem 'dotenv'
 #API
 #####
 gem 'grape'
+gem 'grape-jsonapi'
+
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 gem 'jwt'
-gem 'grape_fast_jsonapi'
-gem 'jsonapi-serializer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -16,11 +16,17 @@ module Api
 
       def respond
         Rack::Response.new(
-          options.to_json, STATUS
+          options.to_json, exception.try(:status) || STATUS
         )
       end
 
       private
+
+      def options
+        {
+          error: exception.message
+        }
+      end
 
       attr_accessor :exception
     end

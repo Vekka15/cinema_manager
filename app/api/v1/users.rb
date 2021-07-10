@@ -14,7 +14,19 @@ module V1
       end
 
       post '/sign_in' do
+        token = ::Api::Authentication.call(params[:username], params[:password])
+
+        render({ token: token })
       end
+
+      # EXAMPLE
+      desc 'test'
+
+      authenticate_user
+      
+      get '/test' do
+        render({lel: 'lel'})
+      end      
     end
   end
 end

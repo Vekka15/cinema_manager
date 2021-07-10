@@ -1,25 +1,25 @@
-module API
-  module Helpers
-    module Serialization
-      extend ActiveSupport::Concern
+# frozen_string_literal: true
 
-      included do
-        format :json
-        formatter :json, Grape::Formatter::Jsonapi
+module Helpers
+  module Serialization
+    extend ActiveSupport::Concern
 
-        def render_serialized(object, serializer: nil)
-          serializer ||= serializer_for(object)
+    included do
+      format :json
+      formatter :json, Grape::Formatter::Jsonapi
 
-          render(
-            serializer.new(to_serialize, *serializer_args).serialized_json
-          )
-        end
+      def render_serialized(object, serializer: nil)
+        serializer ||= serializer_for(object)
 
-        private
+        render(
+          serializer.new(to_serialize, *serializer_args).serialized_json
+        )
+      end
 
-        def serializer_for(object)
-          "API::V1::#{object.class}Serializer"
-        end
+      private
+
+      def serializer_for(object)
+        "API::V1::#{object.class}Serializer"
       end
     end
   end
