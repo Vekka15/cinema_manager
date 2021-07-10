@@ -11,9 +11,11 @@ module Middleware
     private
 
     def authorized_user
-      return user if decoded_token && (user = User.find_by(id: decoded_token['user_id']))
-
-      raise ::Authorization::UnauthorizedError.new
+      if decoded_token && (user = User.find_by(id: decoded_token['user_id']))
+        user
+      else
+        raise ::Authorization::UnauthorizedError.new
+      end
     end
 
     def authorization_header
