@@ -8,13 +8,13 @@ module Timeshows
     end
 
     def call
-      timeshow.delete
+      timeshow.destroy
     end
 
     private
 
     def timeshow
-      @timeshow ||= user.timeshows.find(id)
+      user.timeshows.find(id)
     end
 
     attr_reader :id, :user, :params

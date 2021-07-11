@@ -8,6 +8,8 @@ module Timeshows
     end
 
     def call
+      return unless params[:timeshow]
+
       user.timeshows.create!(params[:timeshow])
     end
 
