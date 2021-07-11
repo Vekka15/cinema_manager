@@ -3,7 +3,7 @@
 module Helpers
   module Serialization
     def render_serialized(object, serializer: nil)
-      serializer ||= serializer_for(object)
+      serializer ||= serializer_for(object).constantize
 
       render(
         serializer.new(object).serializable_hash.to_json
@@ -13,7 +13,11 @@ module Helpers
     private
 
     def serializer_for(object)
-      "Api::V1::#{object.class}Serializer".constantize
+      if object.respond_to?(:model_name)
+        "Api::V1::#{object.model_name.name}Serializer"
+      else
+        "Api::V1::#{object.class}Serializer"
+      end
     end
   end
 end

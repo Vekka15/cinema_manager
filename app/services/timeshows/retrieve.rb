@@ -4,7 +4,7 @@ module Timeshows
 
     def initialize(movie_id:, user_id:)
       @movie_id = movie_id
-      @owner_id = owner_id
+      @user_id = user_id
     end
 
     def call
@@ -20,7 +20,7 @@ module Timeshows
     end
 
     def movie
-      scope = user_id ? user.movies : Movie
+      scope = user_id ? user.movies : Movie.all
       scope.find(movie_id)
     end
   end

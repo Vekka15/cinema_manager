@@ -8,7 +8,7 @@ module Timeshows
     end
 
     def call
-      timeshow.destroy!
+      timeshow.delete
     end
 
     private
