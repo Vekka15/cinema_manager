@@ -12,6 +12,10 @@ module Helpers
       rescue_from ActiveRecord::RecordNotFound do |exception|
         ::Api::ErrorHandlers::RecordNotFound.respond(exception)
       end
+
+      rescue_from :all do |exception|
+        ::Api::ErrorHandlers::Base.respond(exception)
+      end
     end
   end
 end

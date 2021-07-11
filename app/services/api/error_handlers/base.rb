@@ -3,9 +3,6 @@
 module Api
   module ErrorHandlers
     class Base
-
-      STATUS = 400
-
       def initialize(exception)
         @exception = exception
       end
@@ -16,11 +13,21 @@ module Api
 
       def respond
         Rack::Response.new(
-          options.to_json, STATUS
+          options.to_json, exception.try(:status) || status
         )
       end
 
       private
+
+      def options
+        {
+          error: exception.message
+        }
+      end
+
+      def status
+        400
+      end
 
       attr_accessor :exception
     end

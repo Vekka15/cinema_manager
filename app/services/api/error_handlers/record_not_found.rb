@@ -4,16 +4,21 @@ module Api
   module ErrorHandlers
     class RecordNotFound < Base
 
-      STATUS = 404
-      MESSAGE = '404 Not Found'.freeze
-
       private
 
       def options
         {
-          error: MESSAGE,
+          error: message,
           trace: exception.backtrace[0, 10]
         }.compact
+      end
+
+      def status
+        404
+      end
+
+      def message
+        "#{status} Not Found"
       end
     end
   end

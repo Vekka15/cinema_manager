@@ -21,6 +21,8 @@ Bundler.require(*Rails.groups)
 
 module CinemaManager
   class Application < Rails::Application
+    require 'dotenv'
+    Dotenv.load('.env')
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
@@ -32,9 +34,15 @@ module CinemaManager
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
+    config.eager_load_paths.concat(
+      [
+        "#{config.root}/lib",
+        "#{config.root}/lib/exceptions"
+      ]
+    )
+
     config.api_only = true
 
-    require 'dotenv'
-    Dotenv.load('.env')
+    config.jwt_hmac_secret = ENV['JWT_HMAC_SECRET']
   end
 end

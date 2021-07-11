@@ -6,7 +6,7 @@ module V1
 
     resources :users do
       desc 'Login cinema owner',
-            success: { code: 201, message: '' }
+            success: { code: 200, message: '' }
 
       params do
         requires :username, type: String, desc: 'Email of a user'
@@ -14,7 +14,19 @@ module V1
       end
 
       post '/sign_in' do
+        token = ::Api::Authentication.call(params[:username], params[:password])
+
+        render({ token: token })
       end
+
+      # EXAMPLE
+      desc 'test'
+
+      authenticate_user
+      
+      get '/test' do
+        render({lel: 'lel'})
+      end      
     end
   end
 end
