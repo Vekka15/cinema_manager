@@ -2,9 +2,8 @@ module Timeshows
   class Retrieve
     include Callable
 
-    def initialize(movie_id:, user_id:)
-      @movie_id = movie_id
-      @user_id = user_id
+    def initialize(movie:)
+      @movie = movie
     end
 
     def call
@@ -13,15 +12,6 @@ module Timeshows
 
     private
 
-    attr_reader :movie_id, :user_id
-
-    def user
-      User.find(user_id)
-    end
-
-    def movie
-      scope = user_id ? user.movies : Movie.all
-      scope.find(movie_id)
-    end
+    attr_reader :movie
   end
 end

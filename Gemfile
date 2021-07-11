@@ -28,7 +28,7 @@ gem 'rack-cors'
 gem 'dotenv'
 
 #######
-#API
+# API
 #####
 gem 'grape'
 gem 'grape-jsonapi'
@@ -37,6 +37,11 @@ gem 'grape-swagger'
 gem 'grape-swagger-rails'
 gem 'jwt'
 
+##################
+# HTTP CONNECTION
+#################
+gem 'faraday'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
@@ -44,6 +49,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'database_cleaner'
   gem 'timecop'
+  gem 'webmock'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

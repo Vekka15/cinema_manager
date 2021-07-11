@@ -14,7 +14,7 @@ class JsonWebToken
     private
 
     def secret
-      Rails.application.config.jwt_hmac_secret
+      Rails.application.config.jwt.hmac_secret
     end
   end
 end

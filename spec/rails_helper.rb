@@ -9,6 +9,7 @@ require 'database_cleaner'
 require 'factory_bot'
 require 'bcrypt'
 require 'support/api_helper'
+require 'webmock/rspec'
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
@@ -16,6 +17,9 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+WebMock.disable_net_connect!(allow_localhost: true)
+
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include ApiHelper
@@ -26,6 +30,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
+    WebMock.allow_net_connect!
   end
 
   config.before(:each, :js => true) do
@@ -47,6 +52,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
+    WebMock.disable_net_connect! allow_localhost: true
   end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

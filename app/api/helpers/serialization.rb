@@ -2,11 +2,11 @@
 
 module Helpers
   module Serialization
-    def render_serialized(object, serializer: nil)
+    def render_serialized(object, serializer: nil, context: {})
       serializer ||= serializer_for(object).constantize
 
       render(
-        serializer.new(object).serializable_hash.to_json
+        serializer.new(object, params: context).serializable_hash.to_json
       )
     end
 

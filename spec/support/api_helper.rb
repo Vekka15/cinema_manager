@@ -20,7 +20,7 @@ module ApiHelper
   def jwt_token_for_user(user)
     JWT.encode(
       { user_id: user.id, exp: 24.hours.from_now.to_i },
-      Rails.application.config.jwt_hmac_secret
+      Rails.application.config.jwt.hmac_secret
     )
   end
 end

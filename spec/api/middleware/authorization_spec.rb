@@ -26,7 +26,7 @@ describe Middleware::Authorization do
     end
 
     context 'with correct token' do
-      let(:token) { JWT.encode({ user_id: user.id }, Rails.application.config.jwt_hmac_secret) }
+      let(:token) { JWT.encode({ user_id: user.id }, Rails.application.config.jwt.hmac_secret) }
 
       it 'authorizes user' do
         expect(middleware[1]['user']).to eq user

@@ -43,6 +43,11 @@ module CinemaManager
 
     config.api_only = true
 
-    config.jwt_hmac_secret = ENV['JWT_HMAC_SECRET']
+    config.jwt = ActiveSupport::OrderedOptions.new
+    config.jwt.hmac_secret = ENV['JWT_HMAC_SECRET']
+
+    config.open_movie = ActiveSupport::OrderedOptions.new
+    config.open_movie.api_key = ENV['OPEN_MOVIE_API_KEY']
+    config.open_movie.url = ENV['OPEN_MOVIE_URL']
   end
 end
