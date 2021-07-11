@@ -2,6 +2,18 @@
 
 Hi there. Welcome to Cinema Manager interview project. I have to say that I got a bit carried away with functionality. It took me slightly more time than I expected. There is possibility that Authentication feature was a bit of overkill, but I had a lot of fun with it. :) I implemented everything that was required except for reviews endpoint. If I had more time I would finish it and probably played with exceptions and response code and messages, because there room for improvement in case of adjusting status codes, creating more detailed messages and stuff like this. Also checked code for some unobvious edge cases. 
 
+## Setup
+
+1) `gem install rails`
+2) `bundle install`
+3) `rake db:setup`
+4) Prepare your `.env` file with based on `.env.example` file 
+3) `rails s` to run the server. Enjoy :)
+
+## Specs running
+
+`rspec spec`
+
 ## Decision making
 ### Database Structure
 
@@ -44,3 +56,4 @@ For data persistance I used ActiveRecord and created some small services to perf
 ### Other features
 
 In real time project I would also use pagination for listing timeshows. In case of thousands of records size of response would be huge and there would be a lot of opportunities for problems so easiest thing to eliminate that would be to create some sort of offset or cursor pagination depending on needs.
+
