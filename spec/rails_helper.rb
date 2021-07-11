@@ -9,6 +9,7 @@ require 'database_cleaner'
 require 'factory_bot'
 require 'bcrypt'
 require 'support/api_helper'
+require 'support/model_helper'
 require 'webmock/rspec'
 
 begin
@@ -23,6 +24,7 @@ WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include ApiHelper
+  config.include ModelHelper
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

@@ -29,7 +29,7 @@ module Middleware
     end
 
     def decoded_token
-      ::JsonWebToken.decode(authorization_header)
+      @decoded_token ||= ::JsonWebToken.decode(authorization_header)
     end
   end
 end

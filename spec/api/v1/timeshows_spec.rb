@@ -5,22 +5,33 @@ describe V1::Timeshows, type: :request do
     create :user, username: 'test_user', password_digest: BCrypt::Password.create('test_password')
   end
   let(:movie) { create :movie }
+  let(:basic_path) { '/api/v1/timeshows' }
+  let(:params) do
+    {
+      timeshow: {
+        start_time: Time.current,
+        movie_id: movie.id,
+        price: 1111
+      }
+    }
+  end
 
-  let(:params) { { username: username, password: password } }
+  context 'without authorization' do
+    before do
+      post basic_path, params: params, headers: { 'Authorization' => 'Bearer 1111' }
+    end
+
+    it 'return failure' do
+      expect(response.status).to eq 401
+    end
+
+    it 'return error message' do
+      expect(parsed_body).to eq({ 'error' => 'You are not allowed to perform this action' })
+    end
+  end
 
   describe 'POST /' do
     subject(:post_action) { post_with_token basic_path, params: params }
-
-    let(:basic_path) { '/api/v1/timeshows' }
-    let(:params) do
-      {
-        timeshow: {
-          start_time: Time.current,
-          movie_id: movie.id,
-          price: 1111
-        }
-      }
-    end
 
     context 'with valid params' do
       it 'creates provider' do
@@ -56,7 +67,7 @@ describe V1::Timeshows, type: :request do
         post_action
         expect(parsed_body).to include(
           'errors' => array_including(
-            { 'field' => 'base', 'message' => 'is missing' },
+            { 'field' => 'timeshow', 'message' => 'is missing' },
             { 'field' => 'start_time', 'message' => 'is missing' },
             { 'field' => 'price', 'message' => 'is missing' },
             { 'field' => 'movie_id', 'message' => 'is missing' }

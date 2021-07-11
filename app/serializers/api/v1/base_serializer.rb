@@ -6,7 +6,8 @@ module Api
       def self.context_attributes(*attrs, **opts)
         attrs.each do |attr|
           attribute(attr, **opts) do |record, context|
-            context[attr.to_s.camelize.capitalize]
+            context[attr.to_s.camelize.capitalize] ||
+              (record.send(*attr) if record.respond_to?(*attr))
           end
         end
       end

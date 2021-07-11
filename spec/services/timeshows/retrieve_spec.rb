@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Timeshows::Retrieve do
-  subject(:retriever) { described_class.call(user_id: user_id, movie_id: movie.id) }
+  subject(:retriever) { described_class.call(movie: movie) }
 
   let!(:user) do
     create :user, username: 'test_user', password_digest: BCrypt::Password.create('test_password')

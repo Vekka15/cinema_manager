@@ -14,7 +14,9 @@ module V1
       end
 
       post '/sign_in' do
-        token = ::Api::Authentication.call(params[:username], params[:password])
+        token = ::Api::Authentication.call(
+          username: params[:username], password: params[:password]
+        )
 
         render({ token: token })
       end    

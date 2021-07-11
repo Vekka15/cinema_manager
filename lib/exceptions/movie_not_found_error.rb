@@ -1,8 +1,5 @@
-class MovieNotFoundError < StandardError
-  attr_reader :status
-
+class MovieNotFoundError < CustomError
   def initialize(message = 'Movie was not found in Open Movie Database.', status = 404)
-    @status = status
-    super(message)
+    super(message, status)
   end
 end

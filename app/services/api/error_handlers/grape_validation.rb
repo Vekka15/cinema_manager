@@ -15,7 +15,7 @@ module Api
       def fields_errors
         [].tap do |errors|
           exception.errors.each do |error_key, field_exceptions|
-            field = error_key.first.scan(/.+\[(.+)\]/).flatten.first || 'base'
+            field = error_key.first.scan(/.+\[(.+)\]/).flatten.first || error_key.first
 
             field_exceptions.each do |field_exception|
               errors << {

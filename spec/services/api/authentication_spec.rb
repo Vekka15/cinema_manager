@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Api::Authentication do
-  subject(:authenticator) { described_class.call(username, password) }
+  subject(:authenticator) { described_class.call(username: username, password: password) }
 
   let(:username) { 'test_user' }
   let(:password) { 'test_password' }

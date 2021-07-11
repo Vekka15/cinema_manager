@@ -3,9 +3,6 @@
 module Api
   module ErrorHandlers
     class Base
-
-      STATUS = 500
-
       def initialize(exception)
         @exception = exception
       end

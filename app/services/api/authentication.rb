@@ -4,7 +4,7 @@ module Api
   class Authentication
     include Callable
 
-    def initialize(username, password)
+    def initialize(username:, password:)
       @username = username
       @password = password
     end
