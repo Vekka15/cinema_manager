@@ -4,54 +4,59 @@ module V1
   class Timeshows < V1::Base
     use_api
 
-    resources :movies do
-      resources :timeshows
+    resource :movies do
+      resource :timeshows do
         desc 'List all timeshows',
-            success: { code: 200, model: TimeshowSerializer, message: 'Timeshows listed' }
+             success: { code: 200, model: Api::V1::TimeshowSerializer, message: 'Timeshows listed' }
 
         params do
           optional :owner_id, type: Integer, desc: 'Id of movie owner'
         end
 
         get '/' do
-          timeshows = Timeshows::Retrieve.call(movie_id: params[:id], owner_id: params[:owner_id])
+          timeshows = ::Timeshows::Retrieve.call(movie_id: params[:id], owner_id: params[:owner_id])
 
           render_serialized timeshows
         end
       end
     end
 
-    resources :timeshows do
+    resource :timeshows do
       desc 'Create new timeshow',
-            success: { code: 201, model: TimeshowSerializer, message: 'Timeshow created' }
+            success: { code: 201, model: Api::V1::TimeshowSerializer, message: 'Timeshow created' }
 
       authenticate_user
 
       params do
-        requires :movie_id, type: Integer, desc: 'Id of movie connected with time show'
-        requires :start_time, type: Datetime, desc: 'Time when time shows starts'
-        requires :price, type: Integer, desc: 'Price of the time show'
+        requires :timeshow, type: Hash do
+          requires :movie_id, type: Integer, desc: 'Id of movie connected with time show'
+          requires :start_time, type: DateTime, desc: 'Time when time shows starts'
+          requires :price, type: Integer, desc: 'Price of the time show'
+        end
       end
 
       post '/' do
-        timeshow = Timeshow::Create.call(user: current_user, params: declared(params))
+        timeshow = ::Timeshows::Create.call(
+          user: current_user, params: declared(params)
+        )
 
         render_serialized timeshow
       end
 
       desc 'Updates timeshow',
-            success: { code: 204, model: TimeshowSerializer, message: 'Timeshow updated' }
+            success: { code: 204, model: Api::V1::TimeshowSerializer, message: 'Timeshow updated' }
 
       authenticate_user
 
       params do
-        optional :movie_id, type: Integer, desc: 'Id of movie connected with time show'
-        optional :start_time, type: Datetime, desc: 'Time when time shows starts'
-        optional :price, type: Integer, desc: 'Price of the time show'
+        requires :timeshow, type: Hash do
+          optional :start_time, type: DateTime, desc: 'Time when time shows starts'
+          optional :price, type: Integer, desc: 'Price of the time show'
+        end
       end
 
-      put '/:id' do
-        timeshow = Timeshow::Update.call(
+      patch '/:id' do
+        timeshow = ::Timeshows::Update.call(
           id: params[:id], user: current_user, params: declared(params)
         )
 
@@ -64,7 +69,9 @@ module V1
       authenticate_user
 
       delete '/:id' do
-        Timeshow::Destroy.call(id: params[:id], user: current_user)
+        ::Timeshows::Destroy.call(id: params[:id], user: current_user)
+
+        body false
       end
     end
   end

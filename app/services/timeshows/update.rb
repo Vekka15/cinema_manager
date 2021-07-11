@@ -1,15 +1,16 @@
-module Timeshow
+module Timeshows
   class Update
     include Callable
 
-    def initalize(id:, user:, params:)
+    def initialize(id:, user:, params:)
       @id = id
       @user = user
       @params = params
     end
 
     def call
-      timeshow.update!(params)
+      timeshow.update!(params[:timeshow])
+      timeshow
     end
 
     private

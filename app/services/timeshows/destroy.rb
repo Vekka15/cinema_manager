@@ -1,8 +1,8 @@
-module Timeshow
-  class Update
+module Timeshows
+  class Destroy
     include Callable
 
-    def initalize(id:, user:)
+    def initialize(id:, user:)
       @id = id
       @user = user
     end

@@ -1,8 +1,8 @@
-module Timeshow
+module Timeshows
   class Retrieve
     include Callable
 
-    def initalize(movie_id:, user_id:)
+    def initialize(movie_id:, user_id:)
       @movie_id = movie_id
       @owner_id = owner_id
     end

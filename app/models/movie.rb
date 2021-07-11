@@ -1,6 +1,4 @@
 class Movie < ApplicationRecord
-  has_many :user_movies
-  has_many :users, through: :user_movies
-
-  validates :title, :imdb_id, presence: true
+  has_many :timeshows
+  has_many :users, through: :timeshows
 end

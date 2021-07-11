@@ -1,17 +1,15 @@
-module Timeshow
+module Timeshows
   class Create
     include Callable
 
-    def initalize(user:, params:)
+    def initialize(user:, params:)
       @user = user
       @params = params
     end
 
     def call
-      user.timeshows.create!(params)
+      user.timeshows.create!(params[:timeshow])
     end
-
-    private
 
     attr_reader :user, :params
   end

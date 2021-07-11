@@ -3,10 +3,14 @@
 module V1
   class Base < Grape::API
     def self.use_api(settings = {})
+      format :json
+      formatter :json, Grape::Formatter::Jsonapi
+
       include ::Helpers::Authorization
       include ::Helpers::Exceptions
-      include ::Helpers::Serialization
-      include ::Helpers::Resources
+
+      helpers ::Helpers::Resources
+      helpers ::Helpers::Serialization
 
       use ::Middleware::Authorization
     end

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-module API
+module Api
   module V1
     class TimeshowSerializer < BaseSerializer
       attributes :movie_id,
-                 :owner_id,
                  :start_time,
                  :price
 
