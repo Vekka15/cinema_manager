@@ -6,9 +6,9 @@ Hi there. Welcome to Cinema Manager interview project. I have to say that I got 
 
 1) `gem install rails`
 2) `bundle install`
-3) `rake db:setup`
-4) Prepare your `.env` file with based on `.env.example` file 
-3) `rails s` to run the server. Enjoy :)
+3) Prepare your `.env` file with based on `.env.example` file 
+4) `rake db:setup`
+5) `rails s` to run the server. Enjoy :)
 
 ## Specs running
 

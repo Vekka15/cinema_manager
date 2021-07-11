@@ -19,4 +19,4 @@ MOVIES = [
 
 user = User.create!(username: 'jon_doe', password: ENV['USER_PASSWORD'])
 
-user.movies.create!(MOVIES)
+Movie.create!(MOVIES)
